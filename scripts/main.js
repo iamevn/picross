@@ -78,3 +78,7 @@ puzzle.addEventListener("mousedown", function (event) {
 puzzle.addEventListener("mouseup", function (event) {
   which = false;
 }, false);
+
+/* fill out table element on generate */
+var genBtn = document.getElementById("generate");
+var sizeSelector = document.getElementById("size");
