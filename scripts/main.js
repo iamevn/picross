@@ -134,7 +134,7 @@ genBtn.addEventListener("mouseup", function (event) {
     headerCell.className = "top";
     headerCell.scope = "col";
     // fill in clue
-    var s = ""
+    var s = "";
     topClues[j].forEach(function (clue) {
       if (s !== "") {
         s = s + "</br>";
@@ -153,7 +153,7 @@ genBtn.addEventListener("mouseup", function (event) {
     headerCell.className = "side";
     headerCell.scope = "row";
     // fill in clue
-    var s = ""
+    var s = "";
     sideClues[i].forEach(function (clue) {
       if (s !== "") {
         s = s + " ";
@@ -179,7 +179,7 @@ clearBtn.addEventListener("mouseup", function (event) {
 
   var cell;
   for (var i = 0; i < width; i++) {
-    for (var j = 0; j < width; j++) {
+    for (var j = 0; j < height; j++) {
       cell = document.getElementById(i + "-" + j);
       if (cell) {
         cell.className = "empty";
