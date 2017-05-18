@@ -1,0 +1,38 @@
+th.side {
+    text-align: right;
+}
+
+th.top {
+    vertical-align: bottom;
+}
+
+table {
+    table-layout: fixed;
+    border-collapse: collapse;
+}
+
+td {
+    border: 2px solid;
+    width: 30px;
+    height: 30px;
+    text-align: center;
+    vertical-align: center;
+    margin: 0;
+}
+
+td.empty {
+    background: white;
+}
+
+td.fill {
+    background: purple;
+}
+
+td.mark {
+    background: grey;
+}
+
+tr {
+    margin: 0;
+    padding: 0;
+}
