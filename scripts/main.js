@@ -1,7 +1,5 @@
-"use strict";
-
-var puzzle = document.getElementById("puzzle");
-var which = false; // false, "fill", "mark", or "empty".
+const puzzle = document.getElementById("puzzle");
+let which = false; // false, "fill", "mark", or "empty".
 // false when not painting spaces, other values indicate what type of painting is happening
 
 /* 
@@ -35,7 +33,7 @@ function set(td, fill) {
   }
 }
 
-puzzle.addEventListener("mouseover", function (event) {
+puzzle.addEventListener("mouseover", (event) => {
   if (event.target.className === "side" || event.target.className === "top") {
     return;
   }
@@ -51,7 +49,7 @@ puzzle.addEventListener("mouseover", function (event) {
   }
 }, false);
 
-puzzle.addEventListener("mouseout", function (event) {
+puzzle.addEventListener("mouseout", (event) => {
   if (event.target.className === "side" || event.target.className === "top") {
     return;
   }
@@ -59,11 +57,11 @@ puzzle.addEventListener("mouseout", function (event) {
   event.target.style.borderColor = "";
 }, false);
 
-puzzle.addEventListener("mousedown", function (event) {
+puzzle.addEventListener("mousedown", (event) => {
   if (event.target.className === "side" || event.target.className === "top") {
     return;
   }
-  var type;
+  let type;
   if (event.buttons === 1) {
     type = "fill";
   }
@@ -75,17 +73,17 @@ puzzle.addEventListener("mousedown", function (event) {
   event.preventDefault();
 }, false);
 
-puzzle.addEventListener("mouseup", function (event) {
+puzzle.addEventListener("mouseup", (event) => {
   which = false;
 }, false);
 
 /* fill out table when generate is clicked */
-var sizeSelector = document.getElementById("size");
-var genBtn = document.getElementById("generate");
-var clearBtn = document.getElementById("clear");
+const sizeSelector = document.getElementById("size");
+const genBtn = document.getElementById("generate");
+const clearBtn = document.getElementById("clear");
 
 /* placeholder puzzles until I can generate or pull puzzles from a big file */
-var placeholders = {
+const placeholders = {
   "5x5" : [
     [5, 5], // size (width, height)
     [[1], [2, 1], [1], [2, 1], [1]], // top hints
@@ -115,72 +113,72 @@ var placeholders = {
       [1], [1, 1, 1, 1], [1, 1, 1, 1], [1, 1, 1, 1], [1, 1, 1, 4]]
   ]
 };
-genBtn.addEventListener("mouseup", function (event) {
-  var puzz = placeholders[sizeSelector.value];
-  var width = puzz[0][0];
-  var height = puzz[0][1];
-  var topClues = puzz[1];
-  var sideClues = puzz[2];
+genBtn.addEventListener("mouseup", (event) => {
+  const puzz = placeholders[sizeSelector.value];
+  const width = puzz[0][0];
+  const height = puzz[0][1];
+  const topClues = puzz[1];
+  const sideClues = puzz[2];
 
   puzzle.innerHTML = "";
 
   // header row
-  var row = puzzle.insertRow();
-  var headerCell = document.createElement("th");
+  let row = puzzle.insertRow();
+  let headerCell = document.createElement("th");
   row.appendChild(headerCell);
-  for (var j = 0; j < width; j++) {
+  for (let j = 0; j < width; j += 1) {
     headerCell = document.createElement("th");
-    headerCell.id = "t" + j;
+    headerCell.id = `t${j}`;
     headerCell.className = "top";
     headerCell.scope = "col";
     // fill in clue
-    var s = "";
-    topClues[j].forEach(function (clue) {
+    let s = "";
+    topClues[j].forEach((clue) => {
       if (s !== "") {
-        s = s + "</br>";
+        s = `${s}</br>`;
       }
-      s = s + clue;
+      s = `${s}${clue}`
     });
     headerCell.innerHTML = s;
     row.appendChild(headerCell);
   }
 
   // main rows
-  for (var i = 0; i < height; i++) {
+  for (let i = 0; i < height; i += 1) {
     row = puzzle.insertRow();
     headerCell = document.createElement("th");
-    headerCell.id = "s" + i;
+    headerCell.id = `s${i}`;
     headerCell.className = "side";
     headerCell.scope = "row";
     // fill in clue
-    var s = "";
-    sideClues[i].forEach(function (clue) {
+    let s = "";
+    sideClues[i].forEach((clue) => {
       if (s !== "") {
-        s = s + " ";
+        s = `${s} `;
       }
-      s = s + clue;
+      s = `${s}${clue}`
     });
     headerCell.innerHTML = s;
     row.appendChild(headerCell);
 
-    for (var j = 0; j < width; j++) {
-      var cell = row.insertCell();
+    for (let j = 0; j < width; j += 1) {
+      let cell = row.insertCell();
       cell.className = "empty";
-      cell.id = i + "-" + j;
+      cell.id = `${i}-${j}`
     }
   }
 }, false);
 
 /* clear all cells */
-clearBtn.addEventListener("mouseup", function (event) {
-  var puzz = placeholders[sizeSelector.value];
-  var width = puzz[0][0];
-  var height = puzz[0][1];
+clearBtn.addEventListener("mouseup", (event) => {
+  let puzz = placeholders[sizeSelector.value];
+  let width = puzz[0][0];
+  let height = puzz[0][1];
 
-  var cell;
-  for (var i = 0; i < width; i++) {
-    for (var j = 0; j < height; j++) {
-      cell = document.getElementById(i + "-" + j);
+  let cell;
+  for (let i = 0; i < width; i += 1) {
+    for (let j = 0; j < height; j += 1) {
+      cell = document.getElementById(`${i}-${j}`);
       if (cell) {
         cell.className = "empty";
       }
