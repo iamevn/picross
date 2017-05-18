@@ -21,7 +21,12 @@ function set(td, fill) {
 }
 
 puzzle.addEventListener("mouseover", function(event) {
+  if (event.target.className == "side" || event.target.className == "top") {
+    return
+  }
+  event.target.style.borderStyle = "solid";
   event.target.style.borderColor = "red";
+
   if (event.buttons != 1 && event.buttons != 2) {
     which = false;
   }
@@ -32,10 +37,17 @@ puzzle.addEventListener("mouseover", function(event) {
 }, false);
 
 puzzle.addEventListener("mouseout", function(event) {
+  if (event.target.className == "side" || event.target.className == "top") {
+    return
+  }
+  event.target.style.borderStyle = "";
   event.target.style.borderColor = "";
 }, false);
 
 puzzle.addEventListener("mousedown", function(event) {
+  if (event.target.className == "side" || event.target.className == "top") {
+    return
+  }
   if (event.buttons == 1) {
     var type = "fill";
   }
@@ -43,6 +55,8 @@ puzzle.addEventListener("mousedown", function(event) {
     var type = "mark";
   }
   which = toggle(event.target, type);
+  // try to avoid selecting any text while moving mouse
+  event.preventDefault();
 }, false);
 
 puzzle.addEventListener("mouseup", function(event) {
